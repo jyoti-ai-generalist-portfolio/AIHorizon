@@ -1,4 +1,496 @@
-# artificial-intelligence-horizon.github.io
-To showcase projects and demos made by Jyoti Rishikesh using AI tools
+# jyoti-ai-generalist-portfolio.github.io/AIHorizon
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Horizon — Portfolio & Product Demos</title>
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
 
-This is where I will be putting in my demos
+  <style>
+    /* --- CSS VARIABLES & BASE STYLES --- */
+    :root {
+      --bg-color: #0b0f17;
+      --card-bg: rgba(23, 32, 51, 0.6);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --primary-accent: #6366f1;
+      --secondary-accent: #a855f7;
+      --cyan-accent: #06b6d4;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* --- BACKGROUND GLOW EFFECTS --- */
+    .glow-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .glow-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.25;
+    }
+
+    .blob-1 {
+      top: -10%;
+      left: 20%;
+      width: 500px;
+      height: 500px;
+      background: var(--primary-accent);
+    }
+
+    .blob-2 {
+      top: 40%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      background: var(--secondary-accent);
+    }
+
+    /* --- LAYOUT CONTAINER --- */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* --- HEADER / NAVIGATION --- */
+    header {
+      padding: 2rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+    }
+
+    .logo-text {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #fff, var(--text-muted));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .btn-github {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      padding: 0.6rem 1.25rem;
+      border-radius: 30px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-github:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    /* --- HERO SECTION --- */
+    .hero {
+      padding: 5rem 0 3rem;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(99, 102, 241, 0.1);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      color: #818cf8;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: 3.25rem;
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+      letter-spacing: -1px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #fff 30%, var(--primary-accent), var(--secondary-accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    /* --- DEMO GRID SECTION --- */
+    .demos-section {
+      padding: 4rem 0 6rem;
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+
+    /* --- DEMO CARD --- */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(99, 102, 241, 0.4);
+      box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(99, 102, 241, 0.15);
+    }
+
+    .card-media {
+      width: 100%;
+      height: 200px;
+      background: #111827;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .card-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .play-overlay {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+      transition: all 0.3s ease;
+    }
+
+    .card:hover .play-overlay {
+      scale: 1.1;
+      background: var(--primary-accent);
+      border-color: var(--primary-accent);
+    }
+
+    .card-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-description {
+      color: var(--text-muted);
+      font-size: 0.925rem;
+      margin-bottom: 1.25rem;
+      flex-grow: 1;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tag {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      color: #cbd5e1;
+      font-weight: 500;
+    }
+
+    .card-footer {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn-action {
+      flex: 1;
+      padding: 0.6rem 0;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--primary-accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: #4f46e5;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding: 3rem 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: var(--text-main);
+      text-decoration: underline;
+    }
+
+    /* --- RESPONSIVE ADJUSTMENTS --- */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.25rem;
+      }
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Blurs -->
+  <div class="glow-bg">
+    <div class="glow-blob blob-1"></div>
+    <div class="glow-blob blob-2"></div>
+  </div>
+
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="logo-container">
+        <div class="logo-icon">
+          <i data-lucide="sparkles" style="color: white; width: 20px;"></i>
+        </div>
+        <span class="logo-text">AI Horizon</span>
+      </div>
+      <a href="https://github.com/jyoti-ai-generalist-portfolio/AIHorizon" target="_blank" class="btn-github">
+        <i data-lucide="github" style="width: 18px;"></i>
+        <span>GitHub Repository</span>
+      </a>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="badge">
+        <i data-lucide="cpu" style="width: 14px;"></i>
+        <span>AI Generalist Portfolio</span>
+      </div>
+      <h1>Building Next-Gen <span class="gradient-text">AI Products & Agents</span></h1>
+      <p>Welcome to AI Horizon. Explore interactive demos, prototype applications, and research implementations spanning multimodal LLMs, autonomous agents, and computer vision.</p>
+    </section>
+
+    <!-- Demos Showcase -->
+    <section class="demos-section">
+      <h2 class="section-title">
+        <i data-lucide="layers" style="color: var(--primary-accent);"></i>
+        Featured Demos
+      </h2>
+
+      <div class="grid">
+
+        <!-- Demo Card 1 -->
+        <div class="card">
+          <div class="card-media">
+            <!-- Replace image with a screenshot or real video tag -->
+            <img src="https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=600&q=80" alt="Multimodal Agent Demo" />
+            <div class="play-overlay">
+              <i data-lucide="play" style="color: white; fill: white; width: 18px;"></i>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Autonomous Web Research Agent</h3>
+            <p class="card-description">An end-to-end agentic workflow that parses web structures, synthesizes reports, and formats structured outputs using Gemini API & LangChain.</p>
+            <div class="tags">
+              <span class="tag">Agentic Workflows</span>
+              <span class="tag">Gemini API</span>
+              <span class="tag">Python</span>
+            </div>
+            <div class="card-footer">
+              <a href="#" class="btn-action btn-primary">Live Demo</a>
+              <a href="https://github.com/jyoti-ai-generalist-portfolio/AIHorizon" target="_blank" class="btn-action btn-secondary">
+                <i data-lucide="code" style="width: 16px;"></i> Code
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Demo Card 2 -->
+        <div class="card">
+          <div class="card-media">
+            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" alt="Generative UI Engine" />
+            <div class="play-overlay">
+              <i data-lucide="play" style="color: white; fill: white; width: 18px;"></i>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Dynamic Generative UI Engine</h3>
+            <p class="card-description">Renders interactive UI components on the fly from natural language prompts using structured JSON schema output from LLMs.</p>
+            <div class="tags">
+              <span class="tag">React</span>
+              <span class="tag">Structured Outputs</span>
+              <span class="tag">Tailwind</span>
+            </div>
+            <div class="card-footer">
+              <a href="#" class="btn-action btn-primary">Live Demo</a>
+              <a href="https://github.com/jyoti-ai-generalist-portfolio/AIHorizon" target="_blank" class="btn-action btn-secondary">
+                <i data-lucide="code" style="width: 16px;"></i> Code
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Demo Card 3 -->
+        <div class="card">
+          <div class="card-media">
+            <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80" alt="Multimodal RAG" />
+            <div class="play-overlay">
+              <i data-lucide="play" style="color: white; fill: white; width: 18px;"></i>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Multimodal Document RAG</h3>
+            <p class="card-description">Extracts insights across mixed documents (diagrams, tables, text) using vector embedding search and visual groundings.</p>
+            <div class="tags">
+              <span class="tag">Vector DB</span>
+              <span class="tag">RAG</span>
+              <span class="tag">Embeddings</span>
+            </div>
+            <div class="card-footer">
+              <a href="#" class="btn-action btn-primary">Live Demo</a>
+              <a href="https://github.com/jyoti-ai-generalist-portfolio/AIHorizon" target="_blank" class="btn-action btn-secondary">
+                <i data-lucide="code" style="width: 16px;"></i> Code
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2026 AI Horizon. Built by an AI Generalist.</p>
+      <p style="margin-top: 0.5rem;">
+        Explore the open-source code on <a href="https://github.com/jyoti-ai-generalist-portfolio/AIHorizon" target="_blank">GitHub</a>.
+      </p>
+    </footer>
+  </div>
+
+  <!-- Initialize Lucide Icons -->
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>
